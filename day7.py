@@ -29,7 +29,7 @@ class Hand:
     
     def card_ranks(self):
         cs = []
-        for card, cnt, in hand.counter.most_common():
+        for card, cnt, in self.counter.most_common():
             cs.append(card)
 
         css = [rr.get(c) for c in cs]
@@ -65,21 +65,33 @@ hand = "32T3K"
 test_hands = ["32T3K", "T55J5", "KK677", "KTJJT", "QQQJA"]
 
 
+ranks = {}
+
+hands = []
+
+bets = {}
 
 
-# with open("input7.txt") as f:
-#     for line in f:
-#         hand, bet = line.split()
-#         s = sort_hand(hand)
-#         print(f"{hand} --> {s}")
-#         print(rank(s))
+with open("input7.txt") as f:
+    for line in f:
+        hh, bet = line.split()
+        # print(hh, bet)
+        r = Hand(hh).rank()
+        ranks[r] = hh
+        bets[hh] = bet
 
 
 
-ranks = []
 
-for h in test_hands:
-    hand = Hand(h)
-    print(f"{h} --> {hand.hand}")
-    print(hand.rank())
-    ranks.append(hand.rank())
+sr = sorted(ranks.keys())
+
+ans = 0
+
+for i, score in enumerate(sr, start=1):
+    print(score)
+    hand = ranks[score]
+    print(hand)
+    bet = bets[hand]
+    print(bet)
+    ans += i * int(bet)
+    print(ans)
