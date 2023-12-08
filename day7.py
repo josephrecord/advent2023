@@ -9,6 +9,8 @@ cards = ("A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2")
 
 rankings = {card: r for r, card in enumerate(cards)}
 
+rr = {card: r for r, card in enumerate(reversed(cards))}
+
 
 class Hand:
     def __init__(self, hand: str) -> None:
@@ -26,10 +28,18 @@ class Hand:
         return tuple(sorted(self.counts, reverse=True))
     
     def card_ranks(self):
-        return tuple(sorted(rankings.get(x) for x in self.counter.keys()))
+        cs = []
+        for card, cnt, in hand.counter.most_common():
+            cs.append(card)
+
+        css = [rr.get(c) for c in cs]
+
+        return tuple(css)
 
     def rank(self):
         return (self.type_(), self.card_ranks())
+
+
 
 
 
